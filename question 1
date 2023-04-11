@@ -1,0 +1,68 @@
+//Emma Stanley 
+// assigment 5, question 1 
+let bubble1;
+ let bubble2;
+ let bubble3;
+ let bubble4;
+ let bubble5;
+ let bubble6;
+ let bubble7;
+ let bubble8; 
+ let bubble9;
+ let bubble10;
+ function setup() {
+   createCanvas(960, 540);
+   bubble1 = new Bubble(222, 210, 30);
+   bubble2 = new Bubble(200, 220, 20);
+   bubble3 = new Bubble(300, 150, 40);
+   bubble4 = new Bubble(250, 150, 10);
+   bubble5 = new Bubble(450, 300, 50);
+   bubble6 = new Bubble(300, 200, 20);
+   bubble7 = new Bubble(200, 210, 30);
+   bubble8 = new Bubble(100, 200, 10);
+   bubble9 = new Bubble(100, 200, 50);
+   bubble10 = new Bubble(200,100,20)
+ } 
+
+ function draw() {
+   background("skyblue");
+   bubble1.move();
+   bubble1.show();
+   bubble2.move();
+   bubble2.show();
+   bubble3.move();
+   bubble3.show();
+   bubble4.move();
+   bubble4.show();
+   bubble5.move();
+   bubble5.show();
+   bubble6.move();
+   bubble6.show();
+   bubble7.move();
+   bubble7.show();
+   bubble8.move();
+   bubble8.show();
+   bubble9.move();
+   bubble9.show();
+   bubble10.move();
+   bubble10.show();
+ }
+ class Bubble {
+   constructor(x, y, r) {
+     this.x = x;
+     this.y = y;
+     this.r = r;
+   }
+   move() {
+     this.x = this.x + random(-5, 5);
+     this.y = this.y + random(-5, 5);
+   }
+   show() {
+     push();
+     stroke(255);
+     strokeWeight(4);
+     fill("gainsboro");
+     ellipse(this.x, this.y, this.r * 4);
+     pop();
+   }
+ }
