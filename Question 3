@@ -1,0 +1,174 @@
+// Assignment 5, Question 3
+//Emma Stanley 
+let cheese = [];
+ let breeders = [];
+ let catchers = [];
+ function setup() {
+   createCanvas(960, 540);
+   angleMode(DEGREES);
+   addX = -3;
+   for (let cheeseDrawn = 0; cheeseDrawn < 50; cheeseDrawn++) {
+     let x = random(width);
+     let y = random(height);
+     let r = random(10, 60);
+     cheese[cheeseDrawn] = new Cheese(x, y, r);
+   }
+   for (let breedersDefined = 0; breedersDefined < 25; breedersDefined++) {
+     let x = random(width);
+     let y = random(height);
+     breeders[breedersDefined] = new Mouse(x, y);
+   }
+   for (let catchersDefined = 0; catchersDefined < 2; catchersDefined++) {
+     let x = random(width);
+     let y = random(height);
+     catchers[catchersDefined] = new cat(x, y);
+   }
+ }
+
+ function draw() {
+   background("white");
+   for (let cheeseDrawn = 0; cheeseDrawn < cheese.length; cheeseDrawn++) {
+     cheese[cheeseDrawn].move();
+     cheese[cheeseDrawn].show();
+   }
+   for (
+     let breedersDefined = 0;
+     breedersDefined < breeders.length;
+     breedersDefined++
+   ) {
+     breeders[breedersDefined].move();
+     breeders[breedersDefined].show();
+   }
+   for (
+     let catchersDefined = 0;
+     catchersDefined < catchers.length;
+     catchersDefined++
+   ) {
+     catchers[catchersDefined].move();
+     catchers[catchersDefined].show();
+   }
+ }
+ class Cheese {
+   constructor(x, y, r) {
+     this.x = x;
+     this.y = y;
+     this.r = r;
+   }
+   move() {
+     this.x = this.x + random(-10, 10);
+     this.y = this.y + random(-10, 10);
+   }
+   show() {
+     push();
+     translate(this.x, this.y);
+strokeWeight(2);
+     scale(0.3)
+  fill(255, 204, 0);
+    rect(100, 100, 200, 200, 20);
+    // cheese holes
+    fill(255, 255, 255);
+    noStroke();
+    ellipse(140, 160, 40, 40);
+    ellipse(240, 130, 40, 50);
+    ellipse(160, 230, 50, 40);
+    ellipse(220, 210, 50, 40);
+    ellipse(250, 260, 50, 50);
+     pop();
+   }
+ }
+ class cat {
+   constructor(x, y, r) {
+     this.x = x;
+     this.y = y;
+     this.addX = addX;
+   }
+   move() {
+     this.x = this.x + this.addX;
+     let isTooFarLeft = this.x < 0;
+     let isTooFarRight = this.x > width;
+     if (isTooFarLeft || isTooFarRight) {
+       this.addX = -this.addX;
+       this.y = random(height);
+     }
+   }
+   show() {
+     push();
+     translate(this.x, this.y);
+      noStroke()
+     scale(0.8)
+  fill("orange");
+  ellipse(200, 200, 200, 200); // body
+  fill(255);
+  ellipse(150, 180, 50, 50); // left eye
+  ellipse(250, 180, 50, 50); // right eye
+  fill(0);
+  ellipse(150, 180, 20, 20); // left pupil
+  ellipse(250, 180, 20, 20); // right pupil
+  fill(255, 128, 0);
+  ellipse(200, 240, 120, 60); // mouth
+  fill("orange");
+  strokeWeight(0)
+  triangle(110, 180, 95, 100, 170, 130); // left ear
+  triangle(190, 130, 300, 100, 290, 160); // right ear
+  fill("pink")
+  triangle(200, 220, 190, 230, 210, 230); // nose
+  stroke(0);
+  strokeWeight(1);
+  line(150, 210, 100, 200); // left whisker 1
+  line(150, 215, 100, 215); // left whisker 2
+  line(150, 220, 100, 230); // left whisker 3
+  line(250, 210, 300, 200); // right whisker 1
+  line(250, 215, 300, 215); // right whisker 2
+  line(250, 220, 300, 230); // right whisker 3
+  noStroke();
+  fill("pink");
+  arc(200, 260, 80, 40, 0, 180);  //tongue
+     pop();
+   }
+ }
+ class Mouse {
+   constructor(x, y) {
+     this.x = x;
+     this.y = y;
+     this.addX = -addX;
+   }
+   move() {
+     this.x = this.x + this.addX;
+     let isTooFarLeft = this.x < 0;
+     let isTooFarRight = this.x > width;
+     if (isTooFarLeft || isTooFarRight) {
+       this.addX = -this.addX;
+       this.y = random(height);
+     }
+   }
+   show() {
+     push();
+     translate(this.x, this.y);
+   strokeWeight(2);
+     scale(0.3)
+  fill("grey");
+  ellipse(200, 200, 150, 100); // body
+  fill("white");
+  ellipse(240, 190, 50, 50); // head
+  fill("black");
+  ellipse(250, 190, 20, 20); // eye
+  fill("pink");
+  ellipse(280, 200, 10, 10); // nose
+  fill("grey");
+  strokeWeight(0);
+ rect(50, 200, 90, 10); // tail
+  
+  stroke(0);
+  strokeWeight(1);
+  line(120, 170, 200, 200); // whisker 1
+  line(120, 200, 195, 203); // whisker 2
+  line(120, 230, 195, 203); // whisker 3
+  
+  //triangle(180, 200, 250, 160, 230, 190);
+  ellipse(220, 150, 20, 20); // ear
+  fill("pink")
+  ellipse(220, 150, 8, 8); // ear
+  arc(250, 220, 20, 20, 0, 180);
+     pop();
+   }
+ }
